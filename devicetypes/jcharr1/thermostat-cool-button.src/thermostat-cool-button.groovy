@@ -4,7 +4,9 @@ metadata {
 		capability "Actuator"
 		capability "Button"
 		capability "Sensor"
+        capability "Momentary"
         
+        command "push"
         command "push1"
         command "hold1"
 
@@ -30,7 +32,6 @@ metadata {
 }
 
 def parse(String description) {
-	
 }
 
 def hold1() {
@@ -39,4 +40,9 @@ def hold1() {
 
 def push1() {
 	sendEvent(name: "button", value: "pushed", data: [buttonNumber: "1"], descriptionText: "$device.displayName button 1 was pushed", isStateChange: true)
+}
+
+def push() {
+	log.debug "Executing 'push'"
+	push1()
 }
