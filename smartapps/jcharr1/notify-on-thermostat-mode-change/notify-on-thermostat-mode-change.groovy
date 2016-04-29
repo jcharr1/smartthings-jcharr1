@@ -53,5 +53,5 @@ def initialize() {
 // TODO: implement event handlers
 def thermostatOSHandler(evt){
 	log.debug "Thermostat Operating State Changed: $evt.value"
-	sendPush("$(thermostat.displayName) is now $evt.value)
+	sendPush("${thermostat.displayName} is now ${evt.value}")
 }
