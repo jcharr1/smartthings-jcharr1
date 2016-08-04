@@ -53,5 +53,6 @@ def initialize() {
 // TODO: implement event handlers
 def offlineHandler(evt){
 	log.debug "Switch offline: $evt.value"
-	sendPush("${theSwitch.displayName} is now ${evt.value}. Might want to check the breaker.")
+    sendNotification("${theSwitch.displayName} is now ${evt.value}. Might want to check the breaker.", [method: "both", phone: "3187152772"])
+	//sendPush("${theSwitch.displayName} is now ${evt.value}. Might want to check the breaker.")
 }
