@@ -52,6 +52,7 @@ def initialize() {
 	// TODO: subscribe to attributes, devices, locations, etc.
     log.debug "Subscribe to thermostatMode"
     subscribe(thermostat, "thermostatMode", thermostatModeHandler)
+    subscribe(thermostat, "thermostatOperatingState", thermostatOSHandler)
 }
 
 // TODO: implement event handlers
@@ -63,6 +64,20 @@ def thermostatModeHandler(evt){
     	theVents.off()
     }
     else if(evt.value == "cool")
+    {
+    	log.debug "Opening vents..."
+    	theVents.on()
+    }
+}
+
+def thermostatOSHandler(evt){
+	log.debug "Thermostat Operating State Changed: $evt.value"
+	if(evt.value == "heating")
+    {
+    	log.debug "Closing vents..."
+    	theVents.off()
+    }
+    else if(evt.value == "cooling")
     {
     	log.debug "Opening vents..."
     	theVents.on()
