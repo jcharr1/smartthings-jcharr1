@@ -29,9 +29,13 @@ preferences {
 		// TODO: put inputs here
         input "thermostat", "capability.thermostat", required: true
 	}
-    section("Select Vents") {
+    section("Select Vents (on/off)") {
     	// TODO: put inputs here
     	input "theVents", "capability.switch", required: true, multiple: true
+    }
+    section("Select Vents (levels)") {
+    	// TODO: put inputs here
+    	input "theVentsLevels", "capability.switchLevel", required: true, multiple: true
     }
 }
 
@@ -67,6 +71,11 @@ def thermostatModeHandler(evt){
     {
     	log.debug "Opening vents..."
     	theVents.on()
+		for(ventLevel in theVentsLevels) {
+			if(ventLevel.level == 0) {
+				ventLevel.setLevel(100)
+			}
+		}
     }
 }
 
@@ -80,6 +89,11 @@ def thermostatOSHandler(evt){
     else if(evt.value == "cooling")
     {
     	log.debug "Opening vents..."
-    	theVents.on()
+    	ttheVents.on()
+		for(ventLevel in theVentsLevels) {
+			if(ventLevel.level == 0) {
+				ventLevel.setLevel(100)
+			}
+		}
     }
 }
